@@ -1,0 +1,26 @@
+.counter-area {
+  background-size: cover;
+  background-position: center center; }
+
+.counter-icon i {
+  color: #ffffff;
+  font-size: 40px; }
+
+.counter-text h1 {
+  font-size: 55px;
+  margin-top: 22px;
+  color: #fff; }
+
+.counter-text p {
+  font-size: 18px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0; }
+
+.plus-icon {
+  position: relative;
+  top: -30px;
+  font-size: 40px;
+  right: 2px; }
+
+/*# sourceMappingURL=_counter.css.map */
