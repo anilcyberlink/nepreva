@@ -29,6 +29,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('themes-assets/rs/css/settings.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes-assets/rs/css/layers.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes-assets/rs/css/navigation.css') }}">
+
+
+    <!-- Toastr -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
@@ -43,6 +49,7 @@
     <!-- preloader end  -->
 
     <!-- header-start -->
+    @include('themes.default.common.response')
     <header class="header-default">
 
         <div id="sticky-header" class="main-menu-area" style="padding: 7px 0;">
@@ -68,21 +75,21 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li class="active"><a href="{{ url('/')}}">home </a> </li>
-                                    <li><a href="about.php">About</a> </li>
-                                    <li><a href="services.php">Services <i class="far fa-angle-down"></i></a>
-                                        <ul class="sub-menu text-left">
-                                            <li><a href="inner-services.php">Audit & Assurance Support</a>
-                                            <li><a href="inner-services.php">Accounting & Bookkeeping Services</a></li>
-                                            <li><a href="inner-services.php">Financial Reporting & Consolidation</a></li>
-                                            <li><a href="relationship-buildup.html">Tax & International Tax Support</a></li>
-                                            <li><a href="marketing-analysis.html">Valuation & Transaction Support</a></li>
-                                            <li><a href="marketing-analysis.html">Managed Offshore Teams & Flexible Delivery Models</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="why-nepal.php">Why Nepal? </a></li>
-                                    <li><a href="insights.php">Insights </a></li>
-                                    <li><a href="blog.php">blog </a></li>
-                                    <li><a href="contact.php">contact</a></li>
+                                    @foreach ($navigations as $row)
+                                        @if ($row->id != '2')
+                                            <li><a href="{{ url('page/' . posttype_url($row->uri)) }}">{{ $row->post_type }}</a> </li>
+                                        @else
+                                            <li>
+                                                <a href="{{ url('page/' . posttype_url($row->uri)) }}">{{ $row->post_type }}<i class="far fa-angle-down"></i>
+                                                </a>
+                                                <ul class="sub-menu text-left">
+                                                    @foreach ($services as $service)
+                                                        <li><a href="{{url(geturl($service['uri'],$service['page_key']))}}">{{$service->post_title}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                             </nav>
                         </div>
@@ -101,38 +108,37 @@
             </div>
             <div class="logo-side mb-30">
                 <a href="{{ url('/')}}">
-                    <img src="{{ asset('themes-assets/img/Neprivabglogo.png') }}" alt="" />
+                    <img src="{{ asset('themes-assets/img/Neprivabglogo.png') }}" alt="Nepreva" />
                 </a>
             </div>
             <div class="side-info mb-30">
                 <div class="contact-list mb-30">
                     <h4>Office Address</h4>
-                    <p>Kathmandu
-                        Nepal</p>
+                    <p>{{ $setting->address }}</p>
                 </div>
                 <div class="contact-list mb-30">
                     <h4>Phone Number</h4>
-                    <p>+977-9800000000</p>
-                    <p>+977-9800000001</p>
+                    <p>{{ $setting->phone }}</p>
+                    <p>{{ $setting->phone2 }}</p>
                 </div>
                 <div class="contact-list mb-30">
                     <h4>Email Address</h4>
-                    <p>info@nepreva.com</p>
-                    <p>info@nepreva.com</p>
+                    <p>{{ $setting->email_primary }}</p>
+                    <p>{{ $setting->email_secondary }}</p>
                 </div>
             </div>
 
             <div class="social-icon-right mt-20">
-                <a href="#">
+                <a href="{{$setting->facebook_link}}">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#">
+                <a href="{{$setting->twitter_link}}">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#">
-                    <i class="fab fa-google-plus-g"></i>
+                <a href="{{$setting->linkedin_link}}">
+                    <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="#">
+                <a href="{{$setting->instagram_link}}">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>

@@ -1,44 +1,61 @@
 @if ($paginator->hasPages())
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center my-4">
-            
-            @if ($paginator->onFirstPage())
-                <li class="page-item disabled">
-                    <span class="page-link prev"><<;</span>
-                </li>
-            @else
-                <li class="page-item">
-                    <a class="page-link prev" href="{{ $paginator->previousPageUrl() }}" rel="prev"><<</a>
-                </li>
-            @endif
+<div class="row">
+    <div class="col-xl-12">
+        <div class="basic-pagination text-center">
+            <ul>
 
-            @foreach ($elements as $element)
-                @if (is_string($element))
-                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {{-- Previous Button --}}
+                @if ($paginator->onFirstPage())
+                    <li style="opacity: 0.4; pointer-events: none; cursor: not-allowed;">
+                        <a href="#"><i class="fas fa-angle-double-left"></i></a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ $paginator->previousPageUrl() }}" rel="prev">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
                 @endif
 
-                @if (is_array($element))
-                    @foreach ($element as $page => $url)
-                        @if ($page == $paginator->currentPage())
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">{{ $page }}</span>
-                            </li>
-                        @else
-                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                        @endif
-                    @endforeach
+                {{-- Page Numbers --}}
+                @foreach ($elements as $element)
+
+                    {{-- Dots --}}
+                    @if (is_string($element))
+                        <li style="opacity: 0.4; pointer-events: none;"><a href="#">…</a></li>
+                    @endif
+
+                    {{-- Page Number Links --}}
+                    @if (is_array($element))
+                        @foreach ($element as $page => $url)
+                            @if ($page == $paginator->currentPage())
+                                {{-- No <a> tag, not clickable --}}
+                                <li class="active" aria-current="page" style="pointer-events: none;">
+                                    <span>{{ $page }}</span>
+                                </li>
+                            @else
+                                <li><a href="{{ $url }}">{{ $page }}</a></li>
+                            @endif
+                        @endforeach
+                    @endif
+
+                @endforeach
+
+                {{-- Next Button --}}
+                @if ($paginator->hasMorePages())
+                    <li>
+                        <a href="{{ $paginator->nextPageUrl() }}" rel="next">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                @else
+                    <li style="opacity: 0.4; pointer-events: none; cursor: not-allowed;">
+                        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+                    </li>
                 @endif
-            @endforeach
-            
-            @if ($paginator->hasMorePages())
-                <li class="page-item">
-                    <a class="page-link next" href="{{ $paginator->nextPageUrl() }}" rel="next">>></a>
-                </li>
-            @else
-                <li class="page-item disabled">
-                    <span class="page-link next">>></span>
-                </li>
-            @endif
-        </ul>
-    </nav>
+
+            </ul>
+        </div>
+    </div>
+</div>
 @endif

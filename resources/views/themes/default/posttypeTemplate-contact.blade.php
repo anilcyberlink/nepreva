@@ -2,132 +2,136 @@
 @section('meta_keyword',$data->meta_keyword)
 @section('meta_description',$data->meta_description)
 @section('content')
-	<!-- Breadcrumb -->
-	<div class="breadcrumbs overlay" style="background-image:url('{{$data->banner ? asset('uploads/medium/'.$data->banner) : asset('themes-assets/img/1.jpg')}}')">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="bread-inner">
-						<!-- Bread Menu -->
-						<div class="bread-menu  wow animate__fadeInUp"  data-wow-duration="1s"  data-wow-offset="50">
-							<ul>
-								<li><a href="{{url('/')}}">Home</a></li>
-								<li class="active"><a>{{$data->post_type}}</a></li>
-							</ul>
-						</div>
-						<!-- Bread Title -->
-						<div class="bread-title  wow animate__fadeInUp"  data-wow-duration="1s"  data-wow-offset="50"><h1>{{$data->uid}}</h1></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- / End Breadcrumb -->
 
-	<!-- Contact Us -->
-	<section class="contact-us section-space">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5 col-md-5 col-12">
-					<div class="contact-box-main m-top-30  wow animate__fadeInUp" data-wow-duration="1s" data-wow-offset="50">
-						<div class="contact-title">
-							<h2>Contact us</h2>
-							<p>{{$setting->welcome_title}}</p>
-						</div>
-						<!-- Single Contact -->
-						<div class="single-contact-box d-flex">
-							<div class="c-icon"><i class="fa fa-map-marker"></i></div>
-							<div class="c-text">
-								<h2>Address:</h2>
-								<p> PO Box: {{$setting->address}}</p>
-							</div>
-						</div>
-						<!--/ End Single Contact -->
-						<!-- Single Contact -->
-						<div class="single-contact-box d-flex">
-							<div class="c-icon"><i class="fa fa-phone"></i></div>
-							<div class="c-text">
-								<h2>Call Us Now</h2>
-								<p>Tel.: {{$setting->phone}}<br> Mob.: {{$setting->phone2}}</p>
-							</div>
-						</div>
-						<!--/ End Single Contact -->
-						<!-- Single Contact -->
-						<div class="single-contact-box d-flex">
-							<div class="c-icon"><i class="fa fa-envelope-o"></i></div>
-							<div class="c-text">
-								<h2>Email Us</h2>
-								<p>{{$setting->email_primary}}</p>
-							</div>
-						</div>
-						<!--/ End Single Contact -->
-
-					</div>
-				</div>
-				<div class="col-lg-7 col-md-7 col-12 contact-form-area">
-					<!-- Contact Form -->
-					<div class="contact-box-main">
-						<div class="contact-title">
-							<h2>Contact us for inquiries</h2>
-						</div>
-					</div>
-					<form action="{{ route('sendmail_contact') }}" method="POST" class="uk-grid-small" uk-grid>
-						@csrf
+<!-- breadcrumb-area-start -->
+<div class="breadcrumb-area pt-230 pb-235">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcrumb-text text-center">
+                    <h1>{{$data->post_type}}</h1>
+                    <ul class="breadcrumb-menu">
+                        <li><a href="{{url('/')}}">home</a></li>
+                        <li><span>{{$data->uid}}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact-area-start -->
+<div class="contact-area pt-125 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 offset-lg-2 offset-xl-2">
+                <div class="area-title-blue text-center pr-30 pl-30 mb-70 wow fadeInUp" data-wow-delay=".3s" data-wow-duration=".3">
+                    <span>Message us</span>
+                    <h1>Don't Hesitate To Contact With Us</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9 col-md-8 mb-30">
+                <div class="contact-us-01-wrapper">
+                    <form id="contacts-us-form" class="contacts-us-form" action="{{ route('sendmail_contact') }}" method="POST" >
+                        @csrf
 						<input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
-					
-						<div class="row mb-3">
-							<div class="col-md-6 mb-3 mb-md-0 faq-form">
-								<input type="text" class="form-control" name="full_name" placeholder="Name" required>
-							</div>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" placeholder="Email address" required>
-							</div>
-						</div>
-					
-						<div class="row mb-3">
-							<div class="col-md-6 mb-3 mb-md-0">
-								<input type="text" class="form-control" name="number" placeholder="Phone number" required>
-							</div>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="subject" placeholder="Subject">
-							</div>
-						</div>
-						<div class=" mb-3">
-								<input type="text" class="form-control" name="country" placeholder="Country">
-						</div>
-					
-						<div class="mb-3">
-							<textarea class="form-control" name="message" rows="5" placeholder="Write message" ></textarea>
-						</div>
-					
-						<button type="submit" class="btn btn-info text-white fw-semibold">Send A Message</button>
-					</form>
-					<!--/ End contact Form -->
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<div class="contact-form-area m-top-30">
-					    <div class="test-map">
-					        <style>
-    					        .test-map{
-    					            margin:0;
-    					            padding:0;
-    					        }
-					            .test-map *{
-					                width:100%;
-					                height:350px;
-					            }
-					        </style>
-					        {!! $setting->google_map !!}
-					    </div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--/ End Contact Us -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="contacts-icon contactss-name">
+                                    <input name="name" type="text" placeholder="Your Full Name.... " required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="contacts-icon contactss-address">
+                                    <input name="address" type="text" placeholder="Your Address...." required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="contacts-icon contactss-call">
+                                    <input name="phone" type="text" placeholder="Your Phone Number...." required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="contacts-icon contactss-email">
+                                    <input name="email" type="email" placeholder="Your Email...." required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contacts-icon contactss-message">
+                                    <textarea name="message" id="comments" cols="30" rows="10" placeholder="Your Comments...." required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contacts-us-form-button">
+                                    <button class="btn" type="submit">send message <i class="far fa-long-arrow-right"></i></button>
+                                    <p class="ajax-response"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-30">
+                <div class="contact-l-adddress-wrapper">
+                    <ul class="contact-1-list-address">
+                        <li>
+                            <div class="contact-1-address-icon">
+                                <i class="fal fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-1-address-text">
+                                <h3>Address</h3>
+                                <p>{{ $setting->address }}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-1-address-icon">
+                                <i class="fal fa-envelope-open"></i>
+                            </div>
+                            <div class="contact-1-address-text">
+                                <h3>Email Us</h3>
+                                <p>{{ $setting->email_primary }} <br>{{ $setting->email_secondary }} </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-1-address-icon">
+                                <i class="fal fa-phone"></i>
+                            </div>
+                            <div class="contact-1-address-text">
+                                <h3>Call Us</h3>
+                                <p>{{$setting->phone}}<br>{{$setting->phone2}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact-area-end -->
+ <!-- map-area-start -->
+<div class="map-area">
+    <div class="map-wrapper">
+        <div class="contact-map">
+            <div style="position: relative;">
+                <div class="test-map">
+                    <style>
+                        .test-map{
+                            margin:0;
+                            padding:0;
+                        }
+                        .test-map *{
+                            width:100%;
+                            height:550px;
+                        }
+                    </style>
+					{!! $setting->google_map !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- map-area-end -->
 
 <script src="https://www.google.com/recaptcha/api.js?render={{env('SITE_KEY')}}"></script>
 <script>

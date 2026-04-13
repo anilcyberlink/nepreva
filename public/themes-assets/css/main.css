@@ -1777,7 +1777,7 @@ label {
   text-transform: capitalize;
   color: #222;
   font-weight: 600;
-  white-space: nowrap;   
+  white-space: nowrap;
 }
 
 .main-menu nav > ul > li > a i {
@@ -4875,6 +4875,12 @@ object-fit: cover; }
 .contactss-website::after {
   content: "\f0ac"; }
 
+.contactss-call::after {
+  content: "\f095"; /* phone icon */
+}
+.contactss-address::after {
+  content: "\f3c5"; /* map-marker-alt (location icon) */
+}
 .contacts-us-form-button .btn {
   padding: 23px 74px 25px; }
 
@@ -5295,6 +5301,27 @@ ul.cat li {
         background: var(--primary);
         color: #ffffff;
         border-color: var(--primary); }
+
+.basic-pagination ul li span {
+    height: 50px;
+    width: 50px;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 5px;
+    line-height: 50px;
+    margin: 0 5px;
+    display: inline-block;
+    text-align: center;
+    border: 2px solid var(--primary);
+}
+
+.basic-pagination ul li.active span {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
 
 .blog-post-tag span {
   font-size: 18px;

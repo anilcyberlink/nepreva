@@ -11,7 +11,7 @@
                                          <!--<h2 class="text-white">LOGO HERE </h2>-->
                                     </div>
                                     <div class="footer-text">
-                                        <p>Inventore veritatis quasi architecto beatae vitae dicta sunt explica. Nemo enim ipsam voluptatem.</p>
+                                        <p>{{ $setting->welcome_title }}</p>
                                     </div>
 
                                 </div>
@@ -23,12 +23,11 @@
                                     </div>
                                     <div class="footer-menu">
                                         <ul>
-                                            <li><a href="about.php"><i class="far fa-angle-right"></i> About Company</a></li>
-                                            <li><a href="contact.php"><i class="far fa-angle-right"></i> Contact Us</a></li>
-                                            <li><a href="services.php"><i class="far fa-angle-right"></i> Services</a></li>
-                                            <li><a href="blog.php"><i class="far fa-angle-right"></i> Blog</a></li>
-                                            <li><a href="why-nepal.php"><i class="far fa-angle-right"></i> Why Nepal?</a></li>
-                                            <li><a href="insights.php"><i class="far fa-angle-right"></i> Insights</a></li>
+                                            @foreach ($navigations as $row)
+                                                <li>
+                                                    <a href="{{ url('page/' . posttype_url($row->uri)) }}"><i class="far fa-angle-right"></i>{{ $row->post_type }}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -57,14 +56,14 @@
                             <div class="col-xl-3 col-lg-3 col-md-6">
                                 <div class="footer-contact">
                                      <div class="footer-title">
-                                        <h3>Contact US</h3>
+                                        <h3>Contact </h3>
                                     </div>
                                     <div class="footer-contact-address">
                                         <div class="footer-contact-icon">
                                             <i class="far fa-envelope-open"></i>
                                         </div>
                                         <div class="footer-contact-text">
-                                            <span>info@nepreva.com</span>
+                                            <span>{{$setting->email_primary}}</span>
                                         </div>
                                     </div>
                                     <div class="footer-contact-address">
@@ -72,7 +71,7 @@
                                             <i class="far fa-map-marker-alt"></i>
                                         </div>
                                         <div class="footer-contact-text">
-                                            <span>Kathmandu, Nepal</span>
+                                            <span>{{$setting->address}}</span>
                                         </div>
                                     </div>
                                     <div class="footer-contact-address">
@@ -80,7 +79,7 @@
                                             <i class="far fa-phone"></i>
                                         </div>
                                         <div class="footer-contact-text">
-                                            <span>+977-9800000000</span>
+                                            <span>{{ $setting->phone}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -91,15 +90,15 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="copyright">
-                                    <p> Copyright <i class="far fa-copyright"></i>2026 <a href="#">Nepreva</a> All Rights Reserved</p>
+                                    <p> Copyright <i class="far fa-copyright"></i>2026 <a href="{{ url('/') }}">Nepreva</a> {{ $setting->copyright_text }}</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="footer-icon text-center text-md-right">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-google"></i></a>
+                                    <a href="{{$setting->facebook_link}}"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="{{$setting->twitter_link}}"><i class="fab fa-twitter"></i></a>
+                                    <a href="{{$setting->instagram_link}}"><i class="fab fa-instagram"></i></a>
+                                    <a href="{{$setting->linkedin_link}}"><i class="fab fa-linkedin"></i></a>
                                 </div>
                             </div>
                         </div>
