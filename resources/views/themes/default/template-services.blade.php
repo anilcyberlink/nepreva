@@ -23,7 +23,6 @@
 <div class="case-details-area pt-130 pb-90">
     <div class="container">
         <div class="row">
-
             <div class="col-xl-8 col-lg-8 mb-30">
                 <div class="case-details-wrapper">
                     <div class="case-details-img mb-50">
@@ -39,25 +38,27 @@
                 </div>
             </div>
             <div class="col-lg-4 col-lg-4 mb-30">
-                <div class="widget mb-40" style="position: sticky; top: 118px;">
-                    <div class="widget-title-box mb-30">
-                        <span class="animate-border"></span>
-                        <h3 class="widget-title">Similar Services</h3>
+                @if($related_posts->count() > 0)
+                    <div class="widget mb-40" style="position: sticky; top: 118px;">
+                        <div class="widget-title-box mb-30">
+                            <span class="animate-border"></span>
+                            <h3 class="widget-title">Similar Services</h3>
+                        </div>
+                        <ul class="recent-posts">
+                            @foreach ($related_posts as $row)
+                                <li>
+                                    <div class="widget-posts-image">
+                                        <a href="{{url(geturl($row['uri'],$row['page_key']))}}"><img src="{{ $row->page_thumbnail ? asset('uploads/medium/'.$row->page_thumbnail) : asset('themes-assets/img/picture/01.jpg') }}" alt="{{$row->post_title}}"></a>
+                                    </div>
+                                    <div class="widget-posts-body">
+                                        <h6 class="widget-posts-title"><a href="{{url(geturl($row['uri'],$row['page_key']))}}">{{ $row->post_title }}</a></h6>
+                                        <div class="widget-posts-meta">{{ $row->post_excerpt }} </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <ul class="recent-posts">
-                        @foreach ($related_posts as $row)
-                            <li>
-                                <div class="widget-posts-image">
-                                    <a href="{{url(geturl($row['uri'],$row['page_key']))}}"><img src="{{ $row->page_thumbnail ? asset('uploads/medium/'.$row->page_thumbnail) : asset('themes-assets/img/picture/01.jpg') }}" alt="{{$row->post_title}}"></a>
-                                </div>
-                                <div class="widget-posts-body">
-                                    <h6 class="widget-posts-title"><a href="{{url(geturl($row['uri'],$row['page_key']))}}">{{ $row->post_title }}</a></h6>
-                                    <div class="widget-posts-meta">{{ $row->post_excerpt }} </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+                @endif
             </div>
         </div>
     </div>
