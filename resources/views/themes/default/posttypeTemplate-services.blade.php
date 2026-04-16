@@ -34,7 +34,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="p-services-wrapper mb-30 wow flipInX" data-wow-delay=".3s" data-wow-duration=".3">
                         <div class="p-services-img">
-                            <img src="{{ $row->banner ? asset('uploads/medium/'.$row->banner) :  asset('themes-assets/img/picture/01.jpg')}}" alt="{{$row->post_title}}">
+                            <img src="{{ $row->page_thumbnail ? asset('uploads/medium/'.$row->page_thumbnail) :  asset('themes-assets/img/picture/01.jpg')}}" alt="{{$row->post_title}}">
                             <div class="p-services-text">
                                 <div class="p-services-icon">
                                     <!-- <i class="fal fa-chart-line"></i> -->

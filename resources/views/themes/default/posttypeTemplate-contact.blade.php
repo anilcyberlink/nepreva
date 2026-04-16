@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-lg-9 col-md-8 mb-30">
                 <div class="contact-us-01-wrapper">
-                    <form id="contacts-us-form" class="contacts-us-form" action="{{ route('sendmail_contact') }}" method="POST" >
+                    <form id="" class="contacts-us-form" action="{{ route('sendmail_contact') }}" method="POST" >
                         @csrf
 						<input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                         <div class="row">
@@ -65,7 +65,6 @@
                             <div class="col-md-12">
                                 <div class="contacts-us-form-button">
                                     <button class="btn" type="submit">send message <i class="far fa-long-arrow-right"></i></button>
-                                    <p class="ajax-response"></p>
                                 </div>
                             </div>
                         </div>

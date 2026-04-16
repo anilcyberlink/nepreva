@@ -26,7 +26,7 @@
             <div class="col-xl-8 col-lg-8 mb-30">
                 <div class="case-details-wrapper">
                     <div class="case-details-img mb-50">
-                        <img src="{{ $data->page_thumbnail ? asset('uploads/medium/'.$data->page_thumbnail) : asset('themes-assets/img/picture/03.jpg') }}" alt="{{$data->post_title}}">
+                        <img src="{{ $data->banner ? asset('uploads/medium/'.$data->banner) : asset('themes-assets/img/picture/03.jpg') }}" alt="{{$data->post_title}}">
                     </div>
                     <div class="row mb-40">
                         <div class="col-xl-12 mb-30">

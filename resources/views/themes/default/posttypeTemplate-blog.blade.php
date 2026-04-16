@@ -31,7 +31,7 @@
                             </div>
                             <div class="blog-text">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> <a href="{{url(geturl($row['uri'],$row['page_key']))}}">12 Oct 2026</a></span>
+                                    <span><i class="far fa-calendar-alt"></i> <a href="{{url(geturl($row['uri'],$row['page_key']))}}">{{ $row->created_at->format('j M Y') }}</a></span>
                                 </div>
 
                                 <h4><a href="{{url(geturl($row['uri'],$row['page_key']))}}">{{$row->post_title}}</a></h4>
