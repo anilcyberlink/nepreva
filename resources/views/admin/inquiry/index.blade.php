@@ -10,30 +10,47 @@
             <div id="users" class="tab-pane active">
                 <div class="table-responsive mhn20 mvn15">
                     <table class="table admin-form table-striped dataTable" id="datatable3">
+                        <colgroup>
+                            <col style="width:5%">
+                            <col style="width:25%">
+                            <col style="width:20%">
+                            <col style="width:40%">
+                            <col style="width:10%"> <!-- action (optional adjust) -->
+                        </colgroup>
+
                         <thead>
                             <tr class="bg-light">
                                 <th>SN</th>
                                 <th>Full Name</th>
                                 <th>Contact Details</th>
-                                <th>Subject</th>
                                 <th>Message</th>
                                 <th class="text-left">Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @if(count($inquiry) > 0)
                                 @foreach($inquiry as $key => $row)
                                     <tr class="bg-light">
                                         <td>{{ $key + 1 }}</td>
+
                                         <td>
                                             {{ ucfirst($row->full_name) }}<br>
-                                            Country: {{ $row->country }}
+                                            Address: {{ $row->country }}
                                         </td>
-                                        <td>{{ $row->email }}<br> {{ $row->number }}</td>
-                                        <td>{{ $row->subject }}</td>
-                                        <td><textarea readonly>{!! $row->message !!}</textarea></td>
+
+                                        <td>
+                                            {{ $row->email }}<br>
+                                            {{ $row->number }}
+                                        </td>
+
+                                        <td>
+                                            <textarea readonly style="width:100%; height:80px; ">{!! $row->message !!}</textarea>
+                                        </td>
+
                                         <td class="text-left">
-                                            <form action="{{ route('inquiry.delete', $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this career entry?');">
+                                            <form action="{{ route('inquiry.delete', $row->id) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure you want to delete this entry?');">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="fa fa-trash form-control" style="color:red;"></button>
@@ -43,7 +60,7 @@
                                 @endforeach
                             @endif
                         </tbody>
-                    </table>                    
+                    </table>
                 </div>
             </div>
         </div>
@@ -63,7 +80,7 @@
 <!-- Datatables Bootstrap Modifications  -->
 <script src="{{asset('vendor/plugins/datatables/media/js/dataTables.bootstrap.js')}}"></script>
     <script type="text/javascript">
-        
+
 
 /********/
   $('document').ready(function(){

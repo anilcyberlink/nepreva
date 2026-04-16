@@ -15,12 +15,13 @@ class FooterComposer{
     }
 
 	public function compose(View $view){
-		
+
 		$view->with('navigations', PostTypeModel::where(['is_menu'=>'1'])->orderBy('ordering','asc')->get());
+		$view->with('blogs', PostModel::where(['status'=>'1','post_type'=>'3'])->orderBy('post_order','asc')->take(2)->get());
 		$view->with('setting', SettingModel::where('id',1)->first());
 
 		$view->with('footer',PostModel::where(['post_category'=>'1'])
 			->orderBy('post_order','asc')
 		->get());
-	}	
+	}
 }

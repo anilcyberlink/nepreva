@@ -39,17 +39,19 @@
             <!-- Feature 1 -->
             @foreach ($posts as $row)
                 <div class="col-xl-4 col-md-6 mb-5">
-                    <div class="features-wrapper text-center">
-                        <div class="features-img">
-                            <img src="{{ $row->banner ? asset('uploads/medium/'.$row->banner) :  asset('themes-assets/img/picture/01.jpg')}}" alt="{{$row->post_title}}">
+                    <a href="{{ url(geturl($row['uri'],$row['page_key'])) }}">
+                        <div class="features-wrapper text-center">
+                            <div class="features-img">
+                                <img src="{{ $row->banner ? asset('uploads/medium/'.$row->banner) :  asset('themes-assets/img/picture/01.jpg')}}" alt="{{$row->post_title}}">
+                            </div>
+                            <div class="features-text">
+                                <h4>{{$row->post_title}}</h4>
+                                <p>
+                                    {{ $row->post_excerpt }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="features-text">
-                            <h4>{{$row->post_title}}</h4>
-                            <p>
-                                {{ $row->post_excerpt }}
-                            </p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>

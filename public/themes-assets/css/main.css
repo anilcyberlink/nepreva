@@ -2694,12 +2694,12 @@ object-fit: cover; }
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1;
   margin-bottom: 0;
-  padding: 19px 42px 22px;
+  padding: 12px 28px;
   text-align: center;
   text-transform: uppercase;
   touch-action: manipulation;
@@ -6332,4 +6332,34 @@ blockquote {
   }
 }
 
+/* home page btn below the banner */
+.scroll-down-indicator {
+    position: relative;
+    text-align: center;
+    margin-top: -50px; /* pulls it up into the slider bottom edge */
+    z-index: 99;
+}
+.scroll-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background: #1f80fd;       /* matches your blue brand color */
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(31, 128, 253, 0.4);
+    animation: bounceDown 1.6s infinite ease-in-out;
+    transition: background 0.3s;
+}
+
+.scroll-arrow:hover {
+    background: #0e6de0;
+}
+
+@keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(8px); }
+}
 /*--- end of preloader ---*/

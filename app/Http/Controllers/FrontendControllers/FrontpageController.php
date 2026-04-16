@@ -24,6 +24,7 @@ use App\Mail\SendResume;
 use App\Mail\CareerApply;
 use App\Mail\CareerMail;
 use App\Models\Posts\PostTypeModel;
+use Illuminate\Support\Facades\Log;
 use Exception;
 use Illuminate\Support\Str;
 
@@ -32,20 +33,30 @@ class FrontpageController extends Controller
     public function index()
     {
         $banners = BannerModel::all();
-        $about = PostTypeModel::where('id', '1')->first();
-        $service = PostTypeModel::where('id', '2')->first();
-        $services = PostModel::where('post_type', '2')->take(4)->get();
-        $blog = PostTypeModel::where('id', '3')->first();
-        $blogs = PostModel::where('post_type', '3')->orderBy('created_at', 'desc')->take(3)->get();
-        $gallery = PostTypeModel::where('id', '5')->first();
-        $galleries = PostModel::where('post_type', '5')->orderBy('created_at', 'asc')->take(4)->get();
-        $partner = PostModel::where('post_type', '8')->with('images')->first();
-        $logistic = PostModel::where(['id' => '17', 'post_type' => $about->id])->first();
-        $mission = PostModel::where(['id' => '6', 'post_type' => $about->id])->first();
-        $vision = PostModel::where(['id' => '7', 'post_type' => $about->id])->first();
-        $setting = SettingModel::where('id', 1)->first();
+        $about = PostTypeModel::find(1);
+        $service = PostTypeModel::find(2);
+        $blog = PostTypeModel::find(3);
+        $contact = PostTypeModel::find(4);
 
-        return view('themes.default.frontpage', compact('banners', 'about', 'services', 'service', 'setting', 'logistic', 'mission', 'vision', 'blog', 'blogs', 'gallery', 'galleries'));
+        $wwr = null;
+        if ($about) {
+            $wwr = PostModel::where(['id' => 2,'post_type' => $about->id])->first();
+        }
+
+        $services = collect();
+        if ($service) {
+            $services = PostModel::where('post_type', $service->id)->take(4)->get();
+        }
+
+        $blogs = collect();
+        if ($blog) {
+            $blogs = PostModel::where('post_type', $blog->id)->latest()->take(2)->get();
+        }
+
+        $setting = SettingModel::find(1);
+        // dd($blog,$blogs);
+
+        return view('themes.default.frontpage', compact('banners', 'about', 'services', 'service', 'setting', 'wwr', 'blog', 'blogs','contact'));
     }
 
     public function posttype($uri)
@@ -193,32 +204,37 @@ class FrontpageController extends Controller
 
     public function sendmail_contact(Request $request)
     {
-        // dd($request->all());
         $g_recaptcha_response = $request->input('g_recaptcha_response');
         $result = $this->getCaptcha($g_recaptcha_response);
-        if ($result->success == true && $result->score > 0.6) {
+        if ($result->success == true ) {
             $request->validate([
-                'full_name' => 'required',
-                'number' => 'required',
-                'email' => 'required|email',
+                'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|email|max:255',
+                'message' => 'nullable|string',
+                'address' => 'nullable|string|max:255',
             ]);
 
-            if ($request->isMethod('post')) {
-                $setting = SettingModel::where('id', 1)->first();
-                $create = ContactModel::create([
-                    'full_name' => $request->full_name,
-                    'email' => $request->email,
-                    'number' => $request->number,
-                    'subject' => $request->subject,
-                    'message' => $request->message,
-                    'country' => $request->country,
-                ]);
-                //   return new ContactMail();
-                Mail::to($setting->email_primary)->send(new ContactMail());
-                $name = $request->full_name;
-                $message = "<p>Thanks for contacting us. One of our team will be in touch with you soon.</p>";
-                return view('themes.default.inquiry-success', compact('message', 'name'));
+            $setting = SettingModel::where('id', 1)->first();
+            $data = ContactModel::create([
+                'full_name' => $request->name,
+                'email' => $request->email,
+                'number' => $request->phone,
+                'subject' => $request->subject,
+                'message' => $request->message,
+                'country' => $request->address,
+            ]);
+            try {
+                return new ContactMail($data);
+                // Mail::to($setting->email_primary)->send(new ContactMail($data));
+            } catch (Exception $e) {
+                // Log the error (important for debugging)
+                Log::error('Mail sending failed: '.$e->getMessage());
             }
+            $name = $request->name;
+            $message = "<p>Thanks for contacting us. One of our team will be in touch with you soon.</p>";
+            return view('themes.default.inquiry-success', compact('message', 'name'));
+
         } else {
             return back()->with('error', 'You are a robot');
         }

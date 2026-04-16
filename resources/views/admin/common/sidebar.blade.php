@@ -38,12 +38,9 @@
                     @if (Request::segment(2) == 'services' ||
                             Request::segment(2) == 'about-us' ||
                             Request::segment(2) == 'blog' ||
-                            Request::segment(2) == 'gallery' ||
                             Request::segment(2) == 'contact' ||
-                            Request::segment(2) == 'partners' ||
-                            Request::segment(2) == 'career' ||
-                            Request::segment(3) == 'career' ||
-                            Request::segment(2) == 'certification' ||
+                            Request::segment(2) == 'insights' ||
+                            Request::segment(2) == 'why-nepal' ||
                             Request::segment(2) == 'posttype')
                         <a class="accordion-toggle menu-open" href="avoid:javascript;">
                         @else
@@ -180,17 +177,17 @@
                 @else
                     <a class="accordion-toggle">
                 @endif
-                    <span class="glyphicon glyphicon-user text-info"></span>
-                    <span class="sidebar-title">Applications & Inquiries</span>
+                    <span class="glyphicon glyphicon-envelope  text-info"></span>
+                    <span class="sidebar-title">Contact Inquiries</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="nav sub-nav">
-                    <li class="{{ Request::segment(2) == 'application' ? 'active' : '' }}">
+                    <!-- <li class="{{ Request::segment(2) == 'application' ? 'active' : '' }}">
                         <a href="{{ url('inquiry/application') }}">
                             <span class="fa fa fa-arrows-h"></span>
                             Applications
                         </a>
-                    </li>
+                    </li> -->
                     <li class="{{ Request::segment(2) == 'contact_us' ? 'active' : '' }}">
                         <a href="{{ url('inquiry/contact_us') }}">
                             <span class="fa fa fa-arrows-h"></span>
